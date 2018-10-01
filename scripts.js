@@ -42,6 +42,8 @@ let clickPowerMultiple = document.getElementById('click-power-multiple');
 //Buy click power
 buyClickPower.addEventListener("click", function () {
     if (cookieCount >= clickPowerPriceAmount) {
+        //update click power
+        clickPower += 1 * Math.floor(clickPowerLevelNumber * 1.05);
         //subtract cookies from the price of the item
         cookieCount -= clickPowerPriceAmount;
         refreshCookieCount()
@@ -83,10 +85,11 @@ buyGrandma.addEventListener("click", function () {
 
     // Make sure we have enough cookies and subtract our cookies from the price.
     if (cookieCount >= grandmaPriceAmount) {
-        // Subtract cookies from the price of the item.
+     //update grandma power
+        grandmaPower += 10 + Math.floor(grandmaLevelNumber * 1.33);
+    // Subtract cookies from the price of the item.
         cookieCount += - grandmaPriceAmount;
         refreshCookieCount()
-
     //upgrade power level
         grandmaLevelNumber += 1;
     //update price
@@ -139,6 +142,8 @@ buyFacility.addEventListener("click", function () {
     if (cookieCount >= facilityPriceAmount) {
         cookieCount -= facilityPriceAmount;
         refreshCookieCount()
+    //update facility power
+        facilityPower += 600 + Math.floor(facilityLevelNumber * 1.33);;
     //upgrade power level
         facilityLevelNumber += 1;
     //update price
@@ -153,7 +158,6 @@ buyFacility.addEventListener("click", function () {
     }
 })
 //game loop
-//game loop
 let autoFacilityStart = function () {
     let facilityInt = window.setInterval(function () {
         cookieCount += facilityPower;
@@ -166,4 +170,50 @@ let refreshFacility = function () {
     facilityPrice.innerHTML = facilityPriceAmount;
     facilityMultiple.innerHTML = facilityPower - 6;
 }
-    
+
+/********************************
+
+          Factory Workers
+
+********************************/
+
+//set default values
+let workerAuto = false;
+let workerStamina = 2000;
+let workerWageAmount = 15;
+let workerLevelNumber = 0;
+//declare DOM variables
+let hireWorkers = document.getElementById('hire-workers');
+let workerWages = document.getElementById('worker-wages');
+let workerLevel = document.getElementById('worker-level');
+let workerMultiple = document.getElementById('worker-multiple');
+//buy a facility
+hireWorkers.addEventListener("click", function () {
+    //set autoLoop to false
+    workerAuto = false;
+    //make sure we have enough cookies
+    if (cookieCount >= workerWageAmount) {
+        cookieCount -= workerWageAmount;
+        refreshCookieCount()
+
+    //upgrade power level
+        workerLevelNumber += 1;
+    //update wages
+        workerWageAmount = Math.floor(workerWageAmount * 1.33);
+    //update worker stamina
+        workerStamina += 600;
+    //turn autoWorker on!
+        workerAuto = true
+        autoWorkerStart();
+
+    //refresh worker
+        refreshWorkers();
+//game loop
+}
+})
+//refresh workers
+let refreshWorkers = function () {
+    workerLevel.innerHTML = workerLevelNumber
+    workerWage.innerHTML = workerWageAmount;
+    workerMultiple.innerHTML = workerPower - 600;
+}
