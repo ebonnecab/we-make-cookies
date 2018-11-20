@@ -1,4 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
 html, body {
     height: 100%;
     width: 100%;
+}
+
+.container {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-template-areas: "a b"
+                         "c d"
+                         "e f";
+                        
+    font-family: 'Raleway', sans-serif;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cookie{
+    grid-area: a;
+}
+
+.shop{
+    grid-area: b;
+}
+
+.click{
+    grid-area: c;
+    border: solid 5px black;
+
+}
+
+.grandma{
+    grid-area: d;
+    border: solid 5px black;
+
+}
+
+.facility{
+    grid-area: e;
+    border: solid 5px black;
+
+}
+
+.workers{
+    grid-area: f;
+    border: solid 5px black;
+
 }
