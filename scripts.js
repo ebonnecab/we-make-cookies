@@ -194,7 +194,7 @@ hireWorkers.addEventListener("click", function () {
     //make sure we have enough cookies
     if (cookieCount >= workerWageAmount) {
         cookieCount -= workerWageAmount;
-        refreshCookieCount()
+        refreshCookieCount();
 
     //upgrade power level
         workerLevelNumber += 1;
@@ -203,17 +203,26 @@ hireWorkers.addEventListener("click", function () {
     //update worker stamina
         workerStamina += 600;
     //turn autoWorker on!
-        workerAuto = true
+        workerAuto = true;
         autoWorkerStart();
 
     //refresh worker
         refreshWorkers();
-//game loop
-}
+    }
 })
+
+//game loop
+
+let autoWorkerStart = function () {
+    let workerInt = window.setInterval(function () {
+        cookieCount += workerStamina;
+        refreshCookieCount();
+    }, 1000);
+}
+
 //refresh workers
 let refreshWorkers = function () {
-    workerLevel.innerHTML = workerLevelNumber
-    workerWage.innerHTML = workerWageAmount;
-    workerMultiple.innerHTML = workerPower - 600;
+    workerLevel.innerHTML = workerLevelNumber;
+    workerWageAmount.innerHTML = workerWageAmount;
+    workerMultiple.innerHTML = workerStamina - 600;
 }
